@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
+<base name="document-to-vector" uuid="A928DDB543BC4E29B7475A6A2E6895A8" collation_locale="en-gb">
+	<schema name="DEFAULT_SCHEMA"/>
+	<table name="Document" uuid="D7C2310EDC844DCDB91DF01D3FF66E99" id="1">
+		<field name="Id" uuid="8D826AAA6B2D4033B51AF686FA690F7F" type="4" unique="true" autosequence="true" not_null="true" id="1" hide_in_REST="true"/>
+		<field name="embedding" uuid="56FC3B4438854B43A4AF09CDF2AA8D96" type="21" blob_switch_size="2147483647" id="2">
+			<field_extra class_id="4D.Vector"/>
+		</field>
+		<field name="text" uuid="C71781863336444F89F4908E95124FB6" type="10" id="3"/>
+		<field name="data" uuid="9EAEBC604A94411595987D6F46C261AB" type="18" blob_switch_size="2147483647" id="4"/>
+		<field name="name" uuid="E2E1D935694048A58C839CA31814F7E7" type="10" id="5"/>
+		<field name="extension" uuid="8091E542516C43B08E032DE8EA512207" type="10" id="6"/>
+		<field name="chunk" uuid="3B9B33C3147D4D729558E46F06C01673" type="21" blob_switch_size="2147483647" id="7"/>
+		<primary_key field_name="Id" field_uuid="8D826AAA6B2D4033B51AF686FA690F7F"/>
+	</table>
+	<index kind="regular" unique_keys="true" uuid="098F583FF8284131971200973EF16794" type="7">
+		<field_ref uuid="8D826AAA6B2D4033B51AF686FA690F7F" name="Id">
+			<table_ref uuid="D7C2310EDC844DCDB91DF01D3FF66E99" name="Document"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="1D991BE7A69E483F9458D76E698415BB" type="3">
+		<field_ref uuid="56FC3B4438854B43A4AF09CDF2AA8D96" name="embedding">
+			<table_ref uuid="D7C2310EDC844DCDB91DF01D3FF66E99" name="Document"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="598FEB7D15FB41B1A909D820E078E571" type="3">
+		<field_ref uuid="8091E542516C43B08E032DE8EA512207" name="extension">
+			<table_ref uuid="D7C2310EDC844DCDB91DF01D3FF66E99" name="Document"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="EB7EDDEB5314478992EB0396CB60564B" type="3">
+		<field_ref uuid="3B9B33C3147D4D729558E46F06C01673" name="chunk">
+			<table_ref uuid="D7C2310EDC844DCDB91DF01D3FF66E99" name="Document"/>
+		</field_ref>
+	</index>
+	<base_extra>
+		<journal_file journal_file_enabled="true"/>
+	</base_extra>
+</base>

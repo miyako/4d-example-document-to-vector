@@ -1,0 +1,16 @@
+{
+	"dependencies": {
+		"extract": {
+			"github": "miyako/extract",
+			"version": "latest"
+		},
+		"text splitter": {
+			"github": "miyako/text-splitter",
+			"version": "latest"
+		},
+		"4D AIKit": {
+			"github": "4d/4D-AIKit",
+			"version": "latest"
+		}
+	}
+}
