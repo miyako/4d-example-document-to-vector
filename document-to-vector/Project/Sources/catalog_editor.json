@@ -1,5 +1,20 @@
 {
 	"tables": {
+		"Embeddings": {
+			"color": {
+				"red": 175,
+				"green": 188,
+				"blue": 191,
+				"alpha": 255
+			},
+			"coordinates": {
+				"left": 267.68359375,
+				"top": 71.31640625,
+				"width": 137.91015625,
+				"height": 159.36328125
+			},
+			"displayable_fields_count": 5
+		},
 		"Document": {
 			"color": {
 				"red": 207,
@@ -14,6 +29,16 @@
 				"height": 188.33203125
 			},
 			"displayable_fields_count": 7
+		}
+	},
+	"relations": {
+		"54ABC3BE43E44E1E9A81DF4ADBC6322D": {
+			"color": {
+				"red": 255,
+				"green": 255,
+				"blue": 255,
+				"alpha": 0
+			}
 		}
 	}
 }

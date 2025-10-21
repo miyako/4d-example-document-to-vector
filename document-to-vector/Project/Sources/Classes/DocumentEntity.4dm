@@ -41,7 +41,7 @@ Function event afterSave($event : Object)
 		: ($event.savedAttributes.includes("data"))
 			
 			If (This:C1470.data=Null:C1517) || (This:C1470.data.size=0)
-				This:C1470.clear(["text"; "name"; "data"; "embedding"; "extension"; "chunk"])
+				This:C1470.clear(["text"; "name"; "data"; "extension"; "chunk"])
 				return 
 			End if 
 			
@@ -59,7 +59,7 @@ Function event afterSave($event : Object)
 		: ($event.savedAttributes.includes("text"))
 			
 			If (This:C1470.text=Null:C1517)
-				This:C1470.clear(["embedding"; "chunk"])
+				This:C1470.clear(["chunk"])
 				return 
 			End if 
 			
@@ -79,12 +79,50 @@ Function event afterSave($event : Object)
 			
 		: ($event.savedAttributes.includes("chunk"))
 			
+			This:C1470.embeddings.drop()
+			
 			If (This:C1470.chunk=Null:C1517)
-				This:C1470.clear(["embedding"])
 				return 
 			End if 
 			
 			//TODO: generate embeddings
+			
+			$vectorman:=Formula:C1597(vectorman_step_5)
+			
+			var $chunk : Object
+			var $text : Text
+			var $start; $end : Integer
+			
+			If (Storage:C1525.API.OpenAI=Null:C1517)
+				return {errCode: -1; message: "OpenAI API key is missing!"}
+			End if 
+			
+			var $AIClient : cs:C1710.AIKit.OpenAI
+			$AIClient:=cs:C1710.AIKit.OpenAI.new(Storage:C1525.API.OpenAI)
+			
+			var $headers : Object
+			$headers:={\
+				dataClassName: "Embeddings"; \
+				attributeName: "embedding"; \
+				foreignKeyAttributeName: "documentId"; \
+				foreignKey: This:C1470.getKey(dk key as string:K85:16); \
+				indexAttributeName: "index"; \
+				modelAttributeName: "model"}
+			
+			var $options : cs:C1710.AIKit.OpenAIEmbeddingsParameters
+			$options:=cs:C1710.AIKit.OpenAIEmbeddingsParameters.new()
+			$options.formula:=$vectorman
+			$options.extraHeaders:=$headers
+			
+			var $index : Integer
+			$index:=0
+			
+			For each ($chunk; This:C1470.chunk.values)
+				$options.extraHeaders.index:=String:C10($index)
+				$text:=$chunk.text
+				$AIClient.embeddings.create($text; "text-embedding-3-large"; $options)
+				$index+=1
+			End for each 
 			
 		Else 
 			
