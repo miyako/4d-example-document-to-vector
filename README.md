@@ -8,3 +8,4 @@
 
 * [`miyako/extract`](https://github.com/miyako/extract)
 * [`miyako/text-splitter`](https://github.com/miyako/text-splitter)
+* [`4d/4D-AIKit`](https://github.com/4d/4D-AIKit)
