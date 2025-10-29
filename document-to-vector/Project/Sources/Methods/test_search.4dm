@@ -21,8 +21,15 @@ If ($GPTFile.exists)
 	$queryParams:={queryPath: True:C214; queryPlan: True:C214}
 	
 	var $results; $documents : 4D:C1709.EntitySelection
-	$results:=ds:C1482.Embeddings.query(Formula:C1597(This:C1470.embedding.cosineSimilarity($vector)>0.5); $queryParams)
-	//$results:=ds.Embeddings.query("embedding > :1"; {metric: mk cosine; threshold: 0.5; vector: $vector}; $queryParams)
+	If (True:C214)
+		$results:=ds:C1482.Embeddings.query(Formula:C1597(This:C1470.embedding.cosineSimilarity($vector)>0.5); $queryParams)
+	Else 
+/*
+vector indexes not available yet
+see https://blog.4d.com/4d-ai-searching-entities-by-vector-similarity-in-4d/
+*/
+		$results:=ds:C1482.Embeddings.query("embedding > :1"; {metric: mk cosine:K95:1; threshold: 0.5; vector: $vector}; $queryParams)
+	End if 
 	
 	$indexes:=$results.extract("index"; "pos"; "documentId"; "Id")
 	
